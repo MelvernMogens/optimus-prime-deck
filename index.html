@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OPTIMUS PRIME — The Prime Directive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#05060A; --steel:#0E1420; --steel2:#161E2C; --line:#233046;
+    --silver:#C9D6E4; --white:#F2F7FF; --mute:#7E8DA3;
+    --red:#E03131; --red-deep:#8A0F17; --blue:#2FA8F5; --blue-deep:#0B3E63;
+    --amber:#F2A900;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#000;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+
+  .page{
+    position:relative; width:1920px; height:1080px; overflow:hidden;
+    background:var(--void); color:var(--white); display:block;
+  }
+
+  /* ── shared atmosphere ── */
+  .grid-overlay{position:absolute;inset:0;
+    background-image:linear-gradient(rgba(47,168,245,.055) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(47,168,245,.055) 1px,transparent 1px);
+    background-size:80px 80px;}
+  .circuit{position:absolute;inset:0;opacity:.5}
+  .vignette{position:absolute;inset:0;
+    background:radial-gradient(ellipse 90% 70% at 50% 45%,transparent 30%,rgba(0,0,0,.82) 100%)}
+  .scan{position:absolute;inset:0;opacity:.16;
+    background:repeating-linear-gradient(180deg,rgba(255,255,255,.10) 0 1px,transparent 1px 5px)}
+  .glow{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none}
+
+  .hazard{position:absolute;left:0;right:0;height:14px;
+    background:repeating-linear-gradient(115deg,var(--amber) 0 26px,#0B0D12 26px 52px);opacity:.85}
+
+  .kicker{font-family:'Barlow Condensed',sans-serif;font-weight:600;
+    letter-spacing:.62em;text-transform:uppercase;font-size:20px;color:var(--blue)}
+  .rule{height:2px;background:linear-gradient(90deg,var(--red),rgba(224,49,49,0));width:260px}
+
+  .chrome{
+    background:linear-gradient(180deg,#FFFFFF 0%,#D8E4F2 26%,#8FA3BC 50%,#EAF2FF 58%,#5C6E86 82%,#B9C9DC 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+
+  /* ── PAGE 1 : TITLE ── */
+  .p1{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .p1 .beam{position:absolute;top:-20%;left:50%;transform:translateX(-50%) rotate(0deg);
+    width:1400px;height:1400px;
+    background:radial-gradient(circle at 50% 50%,rgba(47,168,245,.30),rgba(47,168,245,0) 62%)}
+  .p1 .streak{position:absolute;width:2600px;height:190px;left:-340px;top:735px;transform:rotate(-9deg);
+    background:linear-gradient(90deg,rgba(224,49,49,0),rgba(224,49,49,.55),rgba(224,49,49,0));filter:blur(46px)}
+  .p1 h1{font-family:'Anton',sans-serif;font-size:250px;line-height:.86;letter-spacing:.028em;
+    text-transform:uppercase;position:relative;z-index:3}
+  .p1 h1 .sub{display:block;font-size:250px}
+  .p1 .redbar{width:640px;height:8px;margin:44px 0 34px;position:relative;z-index:3;
+    background:linear-gradient(90deg,rgba(224,49,49,0),var(--red) 22%,#FF6B6B 50%,var(--red) 78%,rgba(224,49,49,0));
+    box-shadow:0 0 40px rgba(224,49,49,.85)}
+  .p1 .tagline{font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:500;
+    letter-spacing:.34em;text-transform:uppercase;color:var(--silver);position:relative;z-index:3}
+  .p1 .emblem{position:relative;z-index:3;margin-bottom:46px}
+  .p1 .meta{position:absolute;bottom:78px;left:0;right:0;display:flex;justify-content:space-between;
+    padding:0 100px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.34em;font-size:19px;
+    text-transform:uppercase;color:var(--mute);z-index:3}
+
+  /* ── PAGE 2 : ORIGIN ── */
+  .p2{display:flex;align-items:center;padding:0 110px;gap:96px}
+  .ghost{position:absolute;font-family:'Anton',sans-serif;font-size:640px;line-height:.8;
+    color:transparent;-webkit-text-stroke:2px rgba(47,168,245,.10);right:-40px;top:-70px;user-select:none}
+  .p2 .col-l{flex:1.08;position:relative;z-index:3}
+  .p2 h2{font-family:'Anton',sans-serif;font-size:118px;line-height:.92;text-transform:uppercase;
+    margin:24px 0 34px;letter-spacing:.012em}
+  .p2 h2 em{font-style:normal;color:var(--red)}
+  .p2 p{font-size:25px;line-height:1.78;color:var(--silver);font-weight:300;max-width:730px}
+  .p2 p + p{margin-top:26px}
+  .p2 .quote{margin-top:44px;padding-left:34px;border-left:4px solid var(--blue);
+    font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:500;letter-spacing:.05em;
+    color:var(--white);line-height:1.42}
+
+  .timeline{flex:.92;position:relative;z-index:3;padding-left:22px}
+  .tl-item{position:relative;padding-left:74px;padding-bottom:60px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{content:'';position:absolute;left:15px;top:34px;bottom:-6px;width:2px;
+    background:linear-gradient(180deg,rgba(47,168,245,.6),rgba(47,168,245,.06))}
+  .tl-item:last-child::before{display:none}
+  .tl-dot{position:absolute;left:4px;top:9px;width:24px;height:24px;border-radius:50%;
+    background:var(--void);border:3px solid var(--blue);box-shadow:0 0 26px rgba(47,168,245,.95)}
+  .tl-item.hot .tl-dot{border-color:var(--red);box-shadow:0 0 30px rgba(224,49,49,1);background:var(--red)}
+  .tl-step{font-family:'Barlow Condensed',sans-serif;font-size:17px;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--blue);margin-bottom:9px}
+  .tl-item.hot .tl-step{color:var(--red)}
+  .tl-title{font-family:'Anton',sans-serif;font-size:42px;text-transform:uppercase;letter-spacing:.015em;margin-bottom:11px}
+  .tl-desc{font-size:20px;line-height:1.6;color:var(--mute);font-weight:300;max-width:520px}
+
+  /* ── PAGE 3 : CODE ── */
+  .p3{display:flex;flex-direction:column;padding:92px 110px 84px}
+  .p3 .head{position:relative;z-index:3;margin-bottom:54px}
+  .p3 h2{font-family:'Anton',sans-serif;font-size:112px;text-transform:uppercase;line-height:.95;margin-top:22px}
+  .p3 .headrow{display:flex;justify-content:space-between;align-items:flex-end}
+  .p3 .headnote{font-family:'Barlow Condensed',sans-serif;font-size:23px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--mute);text-align:right;line-height:1.7;max-width:400px}
+  .cards{display:flex;gap:44px;flex:1;position:relative;z-index:3}
+  .card{flex:1;background:linear-gradient(165deg,rgba(22,30,44,.96),rgba(9,13,20,.96));
+    border:1px solid var(--line);padding:52px 46px;position:relative;overflow:hidden;
+    display:flex;flex-direction:column}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px}
+  .card.c1::before{background:linear-gradient(90deg,var(--blue),rgba(47,168,245,0))}
+  .card.c2::before{background:linear-gradient(90deg,var(--red),rgba(224,49,49,0))}
+  .card.c3::before{background:linear-gradient(90deg,var(--amber),rgba(242,169,0,0))}
+  .card .num{font-family:'Anton',sans-serif;font-size:118px;line-height:.8;color:transparent;
+    -webkit-text-stroke:2px rgba(201,214,228,.20);position:absolute;right:30px;top:30px;letter-spacing:-.02em}
+  .card .ico{margin-bottom:34px}
+  .card h3{font-family:'Anton',sans-serif;font-size:58px;text-transform:uppercase;
+    letter-spacing:.02em;margin-bottom:20px}
+  .card .lead{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:500;
+    letter-spacing:.06em;color:var(--silver);line-height:1.45;margin-bottom:24px}
+  .card p{font-size:20px;line-height:1.72;color:var(--mute);font-weight:300;margin-top:auto}
+
+  /* ── PAGE 4 : WAR ── */
+  .p4{display:flex;align-items:center;justify-content:center;text-align:center}
+  .p4 .half{position:absolute;top:0;bottom:0;width:50%}
+  .p4 .half.l{left:0;background:linear-gradient(115deg,rgba(11,62,99,.85),rgba(5,6,10,.2))}
+  .p4 .half.r{right:0;background:linear-gradient(245deg,rgba(90,15,60,.85),rgba(5,6,10,.2))}
+  .p4 .fracture{position:absolute;left:50%;top:-10%;bottom:-10%;width:4px;transform:translateX(-50%) rotate(4deg);z-index:2;
+    background:linear-gradient(180deg,transparent,#FFF 12%,var(--amber) 50%,#FFF 88%,transparent);
+    box-shadow:0 0 70px 14px rgba(242,169,0,.55)}
+  .p4 .inner{position:relative;z-index:4;width:100%;padding:0 90px}
+  .p4 h2{font-family:'Anton',sans-serif;font-size:138px;line-height:.98;text-transform:uppercase;letter-spacing:.01em}
+  .p4 .scrim{position:absolute;left:50%;top:508px;transform:translate(-50%,-50%);z-index:3;
+    width:1780px;height:560px;border-radius:50%;
+    background:radial-gradient(ellipse at center,rgba(4,6,11,.96) 0%,rgba(4,6,11,.92) 44%,rgba(4,6,11,.55) 70%,rgba(4,6,11,0) 88%)}
+  .p4 h2 .a{color:var(--blue)} .p4 h2 .b{color:var(--red)}
+  .p4 .lede{max-width:1080px;margin:44px auto 0;font-size:25px;line-height:1.8;
+    color:var(--silver);font-weight:300}
+  .vs{display:flex;justify-content:center;gap:0;margin-top:76px;align-items:stretch}
+  .vs .side{flex:1;max-width:470px;text-align:left;padding:36px 44px;
+    background:rgba(6,9,15,.72);border:1px solid var(--line)}
+  .vs .side.r{text-align:right}
+  .vs .name{font-family:'Anton',sans-serif;font-size:52px;text-transform:uppercase;margin-bottom:8px}
+  .vs .side.l .name{color:var(--blue)} .vs .side.r .name{color:var(--red)}
+  .vs .role{font-family:'Barlow Condensed',sans-serif;font-size:21px;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--mute);margin-bottom:20px}
+  .vs .creed{font-size:20px;line-height:1.6;color:var(--silver);font-weight:300}
+  .vs .mid{width:150px;display:flex;align-items:center;justify-content:center;
+    font-family:'Anton',sans-serif;font-size:62px;color:var(--amber);
+    text-shadow:0 0 44px rgba(242,169,0,.9)}
+
+  /* ── PAGE 5 : LEGACY ── */
+  .p5{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding-top:94px}
+  .road{position:absolute;left:0;right:0;bottom:0;height:400px;overflow:hidden}
+  .road .sky{position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(224,49,49,.0) 0%,rgba(224,49,49,.20) 34%,rgba(242,169,0,.30) 62%,rgba(255,190,90,.42) 100%)}
+  .road .lines{position:absolute;left:50%;bottom:0;width:2600px;height:400px;transform:translateX(-50%)}
+  .horizon{position:absolute;left:0;right:0;bottom:400px;height:3px;
+    background:linear-gradient(90deg,transparent,rgba(255,205,120,.95),transparent);
+    box-shadow:0 0 60px 12px rgba(255,180,80,.42)}
+  .sun{position:absolute;left:50%;bottom:210px;transform:translateX(-50%);width:660px;height:660px;
+    border-radius:50%;background:radial-gradient(circle,rgba(255,196,110,.62),rgba(224,49,49,.16) 46%,transparent 70%);
+    filter:blur(24px)}
+  .p5 .inner{position:relative;z-index:5}
+  .p5 h2{font-family:'Anton',sans-serif;font-size:142px;line-height:.92;text-transform:uppercase;letter-spacing:.02em}
+  .p5 .body{max-width:1170px;margin:32px auto 0;font-size:23px;line-height:1.72;color:var(--silver);font-weight:300}
+  .p5 .rollout{margin-top:46px;font-family:'Anton',sans-serif;font-size:74px;text-transform:uppercase;
+    letter-spacing:.13em;color:var(--red);text-shadow:0 0 62px rgba(224,49,49,.85)}
+  .p5 .sig{margin-top:26px;font-family:'Barlow Condensed',sans-serif;font-size:22px;
+    letter-spacing:.44em;text-transform:uppercase;color:var(--mute)}
+</style>
+</head>
+<body>
+
+<!-- ══════════ 01 ══════════ -->
+<section class="page p1" data-document-role="page" data-label="Optimus Prime — Title"
+  data-speaker-notes="Open cold. Let the name land before you say anything. Optimus Prime is not just a character — he is the template for principled leadership in modern pop culture.">
+  <div class="beam"></div>
+  <div class="grid-overlay"></div>
+  <svg class="circuit" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+    <g stroke="#2FA8F5" stroke-width="1.4" fill="none" opacity=".30">
+      <path d="M0 210 H420 L470 260 H760"/><path d="M1920 300 H1500 L1450 350 H1180"/>
+      <path d="M0 880 H300 L360 820 H700"/><path d="M1920 940 H1560 L1500 880 H1240"/>
+      <path d="M180 0 V150 L230 200 V330"/><path d="M1740 1080 V930 L1690 880 V740"/>
+    </g>
+    <g fill="#2FA8F5" opacity=".65">
+      <circle cx="470" cy="260" r="5"/><circle cx="1450" cy="350" r="5"/>
+      <circle cx="360" cy="820" r="5"/><circle cx="1500" cy="880" r="5"/>
+      <circle cx="230" cy="200" r="4"/><circle cx="1690" cy="880" r="4"/>
+    </g>
+  </svg>
+  <div class="streak"></div>
+  <div class="vignette"></div>
+
+  <div class="emblem">
+    <svg width="150" height="150" viewBox="0 0 120 120">
+      <defs>
+        <linearGradient id="em" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFFFFF"/><stop offset="48%" stop-color="#9FB4CC"/>
+          <stop offset="52%" stop-color="#EAF2FF"/><stop offset="100%" stop-color="#5C6E86"/>
+        </linearGradient>
+      </defs>
+      <path d="M60 6 L104 30 L104 74 Q104 100 60 116 Q16 100 16 74 L16 30 Z"
+            fill="none" stroke="#E03131" stroke-width="3" opacity=".85"/>
+      <path d="M60 20 L44 40 L52 40 L52 56 L38 56 L38 74 Q38 92 60 102 Q82 92 82 74 L82 56 L68 56 L68 40 L76 40 Z"
+            fill="url(#em)"/>
+      <circle cx="60" cy="74" r="7" fill="#2FA8F5"/>
+    </svg>
+  </div>
+
+  <div class="kicker">Cybertron &nbsp;·&nbsp; Autobot High Command</div>
+  <h1 class="chrome">Optimus<span class="sub">Prime</span></h1>
+  <div class="redbar"></div>
+  <div class="tagline">Bearer of the Matrix of Leadership</div>
+
+  <div class="meta"><span>File 001 — The Prime Directive</span><span>One Shall Stand · One Shall Fall</span></div>
+  <div class="hazard" style="bottom:0"></div>
+</section>
+
+<!-- ══════════ 02 ══════════ -->
+<section class="page p2" data-document-role="page" data-label="Origin — From Orion Pax to Prime"
+  data-speaker-notes="The point of the origin story: he was not born a leader. He was chosen because of who he already was. Leadership as a burden accepted, not a prize won.">
+  <div class="grid-overlay"></div>
+  <div class="glow" style="width:900px;height:900px;left:-260px;top:-220px;background:rgba(47,168,245,.20)"></div>
+  <div class="glow" style="width:700px;height:700px;right:-200px;bottom:-240px;background:rgba(224,49,49,.16)"></div>
+  <div class="ghost">01</div>
+  <div class="vignette"></div>
+
+  <div class="col-l">
+    <div class="kicker">Origin</div>
+    <h2>From Orion Pax<br>To <em>Prime</em></h2>
+    <p>Before the war, he was a clerk in the Hall of Records — an ordinary Cybertronian who read more than he spoke, and believed that every spark deserved a say in its own fate.</p>
+    <p>He was not the strongest candidate. He was not the loudest. But when the Matrix of Leadership chose its bearer, it did not measure firepower — it measured conviction.</p>
+    <div class="quote">"You still fight for the weak. That is why you lose."<br>— and he kept losing that way, until the galaxy learned to follow him.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div><div class="tl-step">Phase 01</div>
+      <div class="tl-title">The Archivist</div>
+      <div class="tl-desc">Orion Pax catalogues Cybertron's history and watches its institutions rot from the inside.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div><div class="tl-step">Phase 02</div>
+      <div class="tl-title">The Fracture</div>
+      <div class="tl-desc">A gladiator named Megatronus preaches revolution. Orion listens — then breaks with him over the cost.</div>
+    </div>
+    <div class="tl-item hot">
+      <div class="tl-dot"></div><div class="tl-step">Phase 03</div>
+      <div class="tl-title">The Matrix</div>
+      <div class="tl-desc">The Matrix of Leadership selects him. Orion Pax dies as a name; Optimus Prime is born as a duty.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div><div class="tl-step">Phase 04</div>
+      <div class="tl-title">The Exile</div>
+      <div class="tl-desc">Cybertron falls dark. He leads the Autobots across the stars to a small blue planet — and chooses to defend it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 03 ══════════ -->
+<section class="page p3" data-document-role="page" data-label="The Code — What He Stands For"
+  data-speaker-notes="Three pillars. Freedom is the stated value, sacrifice is the price, honour is the constraint. Take all three or you get a tyrant with good branding.">
+  <div class="grid-overlay"></div>
+  <div class="glow" style="width:1100px;height:700px;left:50%;transform:translateX(-50%);top:-360px;background:rgba(47,168,245,.16)"></div>
+  <div class="vignette"></div>
+
+  <div class="head">
+    <div class="headrow">
+      <div>
+        <div class="kicker">The Code</div>
+        <h2>What He<br>Stands For</h2>
+      </div>
+      <div class="headnote">Three principles.<br>Non-negotiable.<br>Even when they cost him everything.</div>
+    </div>
+    <div class="rule" style="margin-top:34px"></div>
+  </div>
+
+  <div class="cards">
+    <div class="card c1">
+      <div class="num">01</div>
+      <div class="ico"><svg width="62" height="62" viewBox="0 0 48 48" fill="none" stroke="#2FA8F5" stroke-width="2.4">
+        <circle cx="24" cy="24" r="18"/><path d="M6 24h36M24 6c5 6 5 30 0 36M24 6c-5 6-5 30 0 36"/></svg></div>
+      <h3>Freedom</h3>
+      <div class="lead">"Freedom is the right of all sentient beings."</div>
+      <p>Not freedom for his side. Not freedom for the strong. The line has no qualifier — and he has spent millions of years refusing to add one.</p>
+    </div>
+    <div class="card c2">
+      <div class="num">02</div>
+      <div class="ico"><svg width="62" height="62" viewBox="0 0 48 48" fill="none" stroke="#E03131" stroke-width="2.4">
+        <path d="M24 42S7 31 7 19a10 10 0 0 1 17-7 10 10 0 0 1 17 7c0 12-17 23-17 23z"/></svg></div>
+      <h3>Sacrifice</h3>
+      <div class="lead">He steps in front, every time.</div>
+      <p>The Prime does not send others where he will not go. He has died more than once so that someone smaller could keep standing — and he has never treated it as remarkable.</p>
+    </div>
+    <div class="card c3">
+      <div class="num">03</div>
+      <div class="ico"><svg width="62" height="62" viewBox="0 0 48 48" fill="none" stroke="#F2A900" stroke-width="2.4">
+        <path d="M24 5l16 7v12c0 11-7 17-16 19-9-2-16-8-16-19V12z"/><path d="M17 24l5 5 10-11"/></svg></div>
+      <h3>Honor</h3>
+      <div class="lead">He fights out of duty, never hatred.</div>
+      <p>He offers his enemy peace before every battle and mercy after it. That restraint is not weakness — it is the only thing separating a protector from a conqueror.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 04 ══════════ -->
+<section class="page p4" data-document-role="page" data-label="The War — One Shall Stand, One Shall Fall"
+  data-speaker-notes="The Megatron contrast is the whole thesis. Same grievance, same intelligence, same era. Opposite answer to one question: what are people for?">
+  <div class="half l"></div><div class="half r"></div>
+  <div class="grid-overlay"></div>
+  <div class="fracture"></div>
+  <div class="scan"></div>
+  <div class="scrim"></div>
+  <div class="vignette"></div>
+
+  <div class="inner">
+    <div class="kicker" style="margin-bottom:30px">The Eternal War</div>
+    <h2><span class="a">One Shall Stand</span><br><span class="b">One Shall Fall</span></h2>
+    <div class="lede">They began in the same ruin, with the same complaint: a world that had stopped listening. One concluded that people must be freed. The other concluded that people must be ruled. Everything since — every world burned, every world saved — descends from that single divergence.</div>
+
+    <div class="vs">
+      <div class="side l">
+        <div class="name">Optimus</div>
+        <div class="role">Protection</div>
+        <div class="creed">Power exists to shield those who have none. A leader is measured by who he protects.</div>
+      </div>
+      <div class="mid">VS</div>
+      <div class="side r">
+        <div class="name">Megatron</div>
+        <div class="role">Conquest</div>
+        <div class="creed">Power exists to be taken and held. A leader is measured by who he defeats.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 05 ══════════ -->
+<section class="page p5" data-document-role="page" data-label="Legacy — Till All Are One"
+  data-speaker-notes="Close on the legacy, not the war. The reason the character outlived the toy line: he is a working definition of leadership that people actually want to follow. End on the line — then stop talking.">
+  <div class="grid-overlay"></div>
+  <div class="road">
+    <div class="sky"></div>
+    <svg class="lines" viewBox="0 0 2600 400" preserveAspectRatio="none">
+      <g stroke="rgba(255,196,120,.28)" stroke-width="2">
+        <line x1="1300" y1="0" x2="-700" y2="400"/><line x1="1300" y1="0" x2="-60" y2="400"/>
+        <line x1="1300" y1="0" x2="520" y2="400"/><line x1="1300" y1="0" x2="2080" y2="400"/>
+        <line x1="1300" y1="0" x2="2660" y2="400"/><line x1="1300" y1="0" x2="3300" y2="400"/>
+      </g>
+      <g stroke="rgba(255,228,175,.80)" stroke-width="5">
+        <line x1="1300" y1="0" x2="1030" y2="400"/><line x1="1300" y1="0" x2="1570" y2="400"/>
+      </g>
+    </svg>
+  </div>
+  <div class="sun"></div>
+  <div class="horizon"></div>
+  <div class="vignette"></div>
+
+  <div class="inner">
+    <div class="kicker">Legacy</div>
+    <h2 class="chrome" style="margin-top:26px">Till All Are One</h2>
+    <div class="body">Four decades on, the toys changed, the studios changed, the continuities contradicted each other a dozen times over — and the character survived all of it intact. Because what people actually kept was never the truck. It was the standard: that real strength is measured by who you protect, not who you defeat.</div>
+    <div class="rollout">Autobots, Roll Out.</div>
+    <div class="sig">Optimus Prime · Bearer of the Matrix of Leadership</div>
+  </div>
+  <div class="hazard" style="top:0"></div>
+</section>
+
+</body>
+</html>
