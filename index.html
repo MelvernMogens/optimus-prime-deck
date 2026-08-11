@@ -124,16 +124,15 @@
   .p4 .half.l{left:0;background:linear-gradient(115deg,rgba(11,62,99,.85),rgba(5,6,10,.2))}
   .p4 .half.r{right:0;background:linear-gradient(245deg,rgba(90,15,60,.85),rgba(5,6,10,.2))}
   .p4 .fracture{position:absolute;left:50%;top:-10%;bottom:-10%;width:4px;transform:translateX(-50%) rotate(4deg);z-index:2;
-    background:linear-gradient(180deg,transparent,#FFF 12%,var(--amber) 50%,#FFF 88%,transparent);
-    box-shadow:0 0 70px 14px rgba(242,169,0,.55)}
+    background:linear-gradient(180deg,rgba(255,255,255,0) 0%,#FFFFFF 11%,#F2A900 23%,
+      rgba(242,169,0,0) 33%,rgba(242,169,0,0) 61%,#F2A900 72%,#FFFFFF 89%,rgba(255,255,255,0) 100%)}
   .p4 .inner{position:relative;z-index:4;width:100%;padding:0 90px}
   .p4 h2{font-family:'Anton',sans-serif;font-size:138px;line-height:.98;text-transform:uppercase;letter-spacing:.01em}
   .p4 .frac-halo{position:absolute;left:50%;top:-10%;bottom:-10%;width:340px;z-index:2;
     transform:translateX(-50%) rotate(4deg);
-    background:linear-gradient(90deg,rgba(242,169,0,0),rgba(242,169,0,.40) 50%,rgba(242,169,0,0))}
-  .p4 .scrim{position:absolute;left:50%;top:508px;transform:translate(-50%,-50%);z-index:3;
-    width:1780px;height:560px;border-radius:50%;
-    background:radial-gradient(ellipse at center,rgba(4,6,11,.96) 0%,rgba(4,6,11,.92) 44%,rgba(4,6,11,.55) 70%,rgba(4,6,11,0) 88%)}
+    background:
+      radial-gradient(ellipse 46% 16% at 50% 17%,rgba(242,169,0,.42),rgba(242,169,0,0) 72%),
+      radial-gradient(ellipse 46% 18% at 50% 80%,rgba(242,169,0,.42),rgba(242,169,0,0) 72%)}
   .p4 h2 .a{color:var(--blue)} .p4 h2 .b{color:var(--red)}
   .p4 .lede{max-width:1080px;margin:44px auto 0;font-size:25px;line-height:1.8;
     color:var(--silver);font-weight:300}
@@ -312,7 +311,6 @@
   <div class="frac-halo"></div>
   <div class="fracture"></div>
   <div class="scan"></div>
-  <div class="scrim"></div>
   <div class="vignette"></div>
 
   <div class="inner">
