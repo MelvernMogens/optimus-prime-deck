@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Universitas Prasetiya Mulya — Sebuah Pengantar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#0E3386;
+    --navy:#0A1E3F;
+    --ink:#131C2B;
+    --bright:#3297FA;
+    --steel:#A1B4C6;
+    --paper:#F5F2EB;
+    --tint:#EAE4D6;
+    --line:#D5CFC1;
+    --muted:#5B6779;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#2E2E2E;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .page{position:relative;width:1920px;height:1080px;overflow:hidden;
+        background:var(--paper);color:var(--ink)}
+  .page.dark{background:var(--navy);color:var(--paper)}
+
+  .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+  .mono{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.26em}
+
+  /* running rails */
+  .rail{position:absolute;left:110px;right:110px;display:flex;justify-content:space-between;
+        font-family:'IBM Plex Mono',monospace;font-size:15px;letter-spacing:.26em;
+        text-transform:uppercase;color:#9CA3AF}
+  .rail.top{top:58px} .rail.bot{bottom:44px}
+  .dark .rail{color:rgba(226,234,247,.55)}
+  .ruletop{position:absolute;left:110px;right:110px;top:100px;height:1px;background:var(--line)}
+  .rulebot{position:absolute;left:110px;right:110px;bottom:84px;height:1px;background:var(--line)}
+  .dark .ruletop,.dark .rulebot{background:rgba(245,242,235,.20)}
+
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:16px;letter-spacing:.30em;
+           text-transform:uppercase;color:var(--blue)}
+  .dark .eyebrow{color:var(--bright)}
+  h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:84px;line-height:1.04;
+     letter-spacing:-.015em;color:var(--blue)}
+  .dark h2{color:var(--paper)}
+  p{font-size:26px;line-height:1.68;font-weight:300;color:#334054}
+  .dark p{color:#CFDAEC}
+  .lead{font-size:31px;line-height:1.55;font-weight:300;color:#3C4A60}
+  .hair{height:1px;background:var(--line)}
+  .dark .hair{background:rgba(245,242,235,.22)}
+  .vhair{width:1px;background:var(--line)}
+  .num{font-family:'Instrument Serif',Georgia,serif;color:var(--blue);line-height:.86;letter-spacing:-.02em}
+  .lab{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.24em;
+       text-transform:uppercase;color:#8B93A2}
+  .dark .lab{color:rgba(200,214,236,.72)}
+
+  /* ─────────── 01 cover ─────────── */
+  .cv-title{position:absolute;left:110px;top:250px;font-size:216px;line-height:.90;color:var(--paper)}
+  .cv-rule{position:absolute;left:110px;top:680px;width:170px;height:4px;background:var(--bright)}
+  .cv-lead{position:absolute;left:110px;top:730px;width:1080px;font-size:34px;line-height:1.5;
+           font-weight:300;color:#C9D6EA}
+  .cv-meta{position:absolute;left:110px;right:110px;top:900px;display:flex;gap:96px}
+  .cv-meta .k{font-size:23px;font-weight:400;color:var(--paper);margin-top:12px}
+  .cv-side{position:absolute;right:110px;top:250px;width:430px;text-align:right}
+  .cv-side .big{font-size:150px;color:var(--paper);line-height:.88}
+  .cv-side .cap{font-size:20px;font-weight:300;color:#B6C6DE;margin-top:22px;line-height:1.6}
+
+  /* ─────────── generic header ─────────── */
+  .hdr{position:absolute;left:110px;top:158px}
+  .hdr h2{margin-top:26px}
+  .hdr-side{position:absolute;right:110px;top:196px;width:560px}
+  .hdr-side p{font-size:24px;line-height:1.62}
+
+  /* ─────────── 02 definisi ─────────── */
+  .d2-body{position:absolute;left:110px;top:440px;width:960px}
+  .d2-pull{position:absolute;right:110px;top:428px;width:600px;border-left:1px solid var(--line);padding-left:44px}
+  .d2-pull .n{font-size:132px;color:var(--blue);line-height:.86;
+              font-family:'Instrument Serif',Georgia,serif}
+  .d2-pull .t{font-size:25px;line-height:1.55;font-weight:300;color:#3C4A60;margin-top:20px}
+  .d2-stats{position:absolute;left:110px;right:110px;top:800px;display:flex}
+  .d2-stats .c{flex:1;padding-left:36px;border-left:1px solid var(--line)}
+  .d2-stats .c:first-child{padding-left:0;border-left:0}
+  .d2-stats .n{font-size:88px;color:var(--blue);line-height:.9;
+               font-family:'Instrument Serif',Georgia,serif}
+  .d2-stats .l{font-size:19px;font-weight:300;color:#5B6779;margin-top:16px;line-height:1.45;
+               max-width:280px}
+
+  /* ─────────── 03 divider ─────────── */
+  .dv{position:absolute;left:110px;top:330px}
+  .dv .big{font-size:236px;line-height:.9;color:var(--paper);
+           font-family:'Instrument Serif',Georgia,serif}
+  .dv .sub{margin-top:56px;width:1180px;font-size:32px;line-height:1.62;font-weight:300;color:#C4D2E8}
+  .dv-tag{position:absolute;right:110px;top:360px;text-align:right;width:430px}
+  .dv-tag .g{padding:28px 0;border-top:1px solid rgba(245,242,235,.20)}
+  .dv-tag .w{display:block;font-family:'Instrument Serif',Georgia,serif;font-size:48px;
+             color:var(--paper);line-height:1.1}
+  .dv-tag .m{display:block;font-family:'IBM Plex Mono',monospace;font-size:14px;
+             letter-spacing:.24em;text-transform:uppercase;
+             color:rgba(200,214,236,.72);margin-top:12px}
+
+  /* ─────────── 04 asal usul ─────────── */
+  .o4-num{position:absolute;left:110px;top:250px;font-size:270px;color:var(--blue);line-height:.84;
+          font-family:'Instrument Serif',Georgia,serif;letter-spacing:-.03em}
+  .o4-cap{position:absolute;left:110px;top:560px;width:600px;font-size:21px;font-weight:300;
+          color:#5B6779;line-height:1.6}
+  .o4-facts{position:absolute;left:110px;top:660px;width:620px}
+  .o4-facts .r{display:flex;gap:24px;padding:20px 0;border-top:1px solid var(--line);align-items:baseline}
+  .o4-facts .r .k{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.2em;
+                  text-transform:uppercase;color:#8B93A2;width:150px;flex:none}
+  .o4-facts .r .v{font-size:22px;font-weight:400;color:var(--ink)}
+  .o4-right{position:absolute;right:110px;top:250px;width:900px}
+  .o4-right h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:62px;
+               line-height:1.08;color:var(--blue);letter-spacing:-.01em}
+  .o4-right p{margin-top:36px}
+
+  /* ─────────── 05 timeline ─────────── */
+  .tl{position:absolute;left:110px;right:110px;top:556px}
+  .tl .axis{position:absolute;left:0;right:0;top:120px;height:1px;background:var(--line)}
+  .tl .row{display:flex}
+  .tl .it{flex:1;position:relative;padding-right:26px}
+  .tl .yr{font-family:'Instrument Serif',Georgia,serif;font-size:44px;color:#95A0B2;line-height:1;
+          height:120px;display:flex;align-items:flex-end;padding-bottom:26px}
+  .tl .it.on .yr{font-size:76px;color:var(--blue)}
+  .tl .dot{position:absolute;left:0;top:115px;width:11px;height:11px;background:#C3BDB0}
+  .tl .it.on .dot{width:15px;height:15px;top:113px;background:var(--blue)}
+  .tl .tx{margin-top:44px}
+  .tl .tx .t{font-size:22px;font-weight:500;color:var(--ink);line-height:1.35}
+  .tl .it.on .tx .t{color:var(--blue)}
+  .tl .tx .d{font-size:18px;font-weight:300;color:#66707F;line-height:1.5;margin-top:12px}
+
+  /* ─────────── 06 tiga sekolah ─────────── */
+  .sc{position:absolute;left:110px;right:110px;top:352px;display:flex}
+  .s6 h2{font-size:72px}
+  .sc .col{flex:1;padding:0 52px}
+  .sc .col:first-child{padding-left:0}
+  .sc .col:last-child{padding-right:0}
+  .sc .div{width:1px;background:var(--line)}
+  .sc .n{font-family:'Instrument Serif',Georgia,serif;font-size:92px;color:var(--blue);line-height:.86}
+  .sc .since{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.24em;
+             text-transform:uppercase;color:#8B93A2;margin-top:16px}
+  .sc h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:38px;line-height:1.16;
+         color:var(--ink);margin-top:14px;min-height:90px}
+  .sc .hr{height:1px;background:var(--line);margin-top:20px}
+  .sc ul{list-style:none;margin-top:24px}
+  .sc li{font-size:21px;font-weight:300;color:#3C4A60;line-height:1.55}
+  .sc .extra{margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+  .sc .extra .h{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.22em;
+                text-transform:uppercase;color:#8B93A2}
+  .sc .extra .b{font-size:20px;font-weight:300;color:#3C4A60;line-height:1.6;margin-top:14px}
+
+  /* ─────────── 07 dua kampus (split) ─────────── */
+  .split{position:absolute;inset:0;display:flex}
+  .half{width:960px;height:1080px;position:relative;padding:140px 92px}
+  .half.d{background:var(--navy)}
+  .half.l{background:var(--tint)}
+  .half .loc{font-family:'IBM Plex Mono',monospace;font-size:15px;letter-spacing:.28em;
+             text-transform:uppercase}
+  .half.d .loc{color:var(--bright)} .half.l .loc{color:var(--blue)}
+  .half h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:78px;line-height:1.06;
+           margin-top:26px;letter-spacing:-.01em}
+  .half.d h3{color:var(--paper)} .half.l h3{color:var(--blue)}
+  .half .desc{font-size:23px;font-weight:300;line-height:1.66;margin-top:34px;width:660px}
+  .half.d .desc{color:#C4D2E8} .half.l .desc{color:#3C4A60}
+  .half .rows{margin-top:64px}
+  .half .rw{display:flex;gap:28px;padding:38px 0;align-items:baseline}
+  .half.d .rw{border-top:1px solid rgba(245,242,235,.20)}
+  .half.l .rw{border-top:1px solid var(--line)}
+  .half .rw .k{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.22em;
+               text-transform:uppercase;width:160px;flex:none}
+  .half.d .rw .k{color:rgba(200,214,236,.7)} .half.l .rw .k{color:#8B93A2}
+  .half .rw .v{font-size:22px;font-weight:400}
+  .half.d .rw .v{color:var(--paper)} .half.l .rw .v{color:var(--ink)}
+  .half .tag{position:absolute;left:92px;bottom:118px;font-family:'IBM Plex Mono',monospace;
+             font-size:14px;letter-spacing:.26em;text-transform:uppercase}
+  .half.d .tag{color:rgba(200,214,236,.6)} .half.l .tag{color:#8B93A2}
+
+  /* ─────────── 08 metode ─────────── */
+  .m8-quote{position:absolute;left:110px;top:214px;width:1500px;
+            font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:92px;
+            line-height:1.1;color:var(--blue);letter-spacing:-.015em}
+  .m8-sub{position:absolute;left:110px;top:432px;width:1420px;font-size:25px;line-height:1.66;
+          font-weight:300;color:#3C4A60}
+  .m8-cols{position:absolute;left:110px;right:110px;top:630px;display:flex}
+  .m8-cols .c{flex:1;padding:0 52px;border-left:1px solid var(--line)}
+  .m8-cols .c:first-child{padding-left:0;border-left:0}
+  .m8-cols .i{font-family:'IBM Plex Mono',monospace;font-size:15px;letter-spacing:.24em;color:var(--bright)}
+  .m8-cols h4{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:38px;
+              line-height:1.16;color:var(--ink);margin-top:20px}
+  .m8-cols .b{font-size:21px;font-weight:300;color:#4A5768;line-height:1.62;margin-top:22px}
+
+  /* ─────────── 09 pembeda ─────────── */
+  .p9-body{position:absolute;left:110px;top:452px;width:1020px}
+  .p9-note{position:absolute;right:110px;top:452px;width:560px;border-left:1px solid var(--line);
+           padding-left:44px;font-size:22px;font-weight:300;line-height:1.66;color:#4A5768}
+  .p9-f{position:absolute;left:110px;right:110px;top:722px}
+  .p9-f .h{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.24em;
+           text-transform:uppercase;color:#8B93A2}
+  .p9-f .row{display:flex;margin-top:26px;border-top:1px solid var(--line);padding-top:34px}
+  .p9-f .row .n{flex:1;font-family:'Instrument Serif',Georgia,serif;font-size:44px;line-height:1.16;
+                color:var(--blue);padding-right:32px}
+
+  /* ─────────── 10 penutup ─────────── */
+  .c10{position:absolute;left:110px;top:300px;width:1240px}
+  .c10 .big{font-family:'Instrument Serif',Georgia,serif;font-size:150px;line-height:.98;
+            color:var(--paper);letter-spacing:-.02em}
+  .c10 p{margin-top:52px;font-size:29px;line-height:1.6;color:#C4D2E8;width:1080px}
+  .c10 .ty{margin-top:64px;font-family:'IBM Plex Mono',monospace;font-size:19px;letter-spacing:.3em;
+           text-transform:uppercase;color:var(--bright)}
+  .c10-side{position:absolute;right:110px;top:318px;width:400px;text-align:right}
+  .c10-side .r{padding:24px 0;border-top:1px solid rgba(245,242,235,.20)}
+  .c10-side .r .k{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.22em;
+                  text-transform:uppercase;color:rgba(200,214,236,.7)}
+  .c10-side .r .v{font-size:21px;color:var(--paper);margin-top:10px;line-height:1.4}
+</style>
+</head>
+<body>
+
+<!-- ══════════ 01 COVER ══════════ -->
+<section class="page dark" data-document-role="page" data-label="Cover"
+ data-speaker-notes="Buka pelan. Sebut satu kalimat: Prasmul itu universitas yang dibangun oleh pelaku bisnis, bukan oleh akademisi. Sisanya biarkan slide yang ngomong.">
+  <div class="rail top"><span>Universitas Prasetiya Mulya</span><span>Sebuah Pengantar</span></div>
+  <div class="ruletop"></div>
+  <div class="cv-title serif">Prasetiya<br>Mulya</div>
+  <div class="cv-side">
+    <div class="big serif">1982</div>
+    <div class="cap">Didirikan 70 pengusaha nasional<br>di Jakarta, 6 September.</div>
+  </div>
+  <div class="cv-rule"></div>
+  <div class="cv-lead">Sebuah janji mulia yang tumbuh menjadi universitas — dari satu kelas MBA di hotel, sampai tiga sekolah di dua kampus.</div>
+  <div class="cv-meta">
+    <div><div class="lab">Julukan</div><div class="k">Prasmulyan</div></div>
+    <div><div class="lab">Moto</div><div class="k">A Collaborative Learning by Enterprising</div></div>
+    <div><div class="lab">Kampus</div><div class="k">BSD City &amp; Cilandak</div></div>
+  </div>
+  <div class="rulebot"></div>
+  <div class="rail bot"><span>01</span><span>Prasetiya Mulya</span></div>
+</section>
+
+<!-- ══════════ 02 DEFINISI ══════════ -->
+<section class="page" data-document-role="page" data-label="Apa itu Prasmul"
+ data-speaker-notes="Definisi singkat dulu. Tekankan kata kuncinya: swasta, fokus bisnis, tapi sekarang juga STEM dan hukum. Empat angka di bawah itu jangkar ingatan audiens.">
+  <div class="rail top"><span>Universitas Prasetiya Mulya</span><span>01 — Definisi</span></div>
+  <div class="ruletop"></div>
+  <div class="hdr" style="width:1180px">
+    <div class="eyebrow">Apa itu Prasmul</div>
+    <h2>Universitas yang dibangun<br>oleh pelaku bisnis.</h2>
+  </div>
+  <div class="d2-body">
+    <p>Perguruan tinggi swasta yang berfokus pada bisnis dan manajemen — dan kini juga merambah sains, teknologi, serta hukum. Bedanya dengan kampus lain terletak pada asal-usulnya: Prasmul tidak lahir dari lembaga akademik.</p>
+    <p style="margin-top:30px">Karena itu kurikulumnya sejak awal berdiri di atas satu prinsip — <span style="color:var(--blue);font-weight:400">teori harus diuji di lapangan.</span></p>
+  </div>
+  <div class="d2-pull">
+    <div class="n">70</div>
+    <div class="t">pengusaha nasional mendirikannya, karena merasa Indonesia butuh manajer yang dididik dengan konteks Indonesia sendiri.</div>
+  </div>
+  <div class="d2-stats">
+    <div class="c"><div class="n">1982</div><div class="l">Tahun berdiri, di bawah Yayasan Prasetiya Mulya</div></div>
+    <div class="c"><div class="n">3</div><div class="l">Sekolah: bisnis, STEM, dan hukum internasional</div></div>
+    <div class="c"><div class="n">16</div><div class="l">Program studi jenjang sarjana</div></div>
+    <div class="c"><div class="n">2</div><div class="l">Kampus: BSD City dan Cilandak</div></div>
+  </div>
+  <div class="rulebot"></div>
+  <div class="rail bot"><span>02</span><span>Definisi</span></div>
+</section>
+
+<!-- ══════════ 03 ARTI NAMA (divider) ══════════ -->
+<section class="page dark" data-document-role="page" data-label="Arti Nama"
+ data-speaker-notes="Slide jeda. Baca kerasnya sekali: janji mulia. Diam sebentar. Ini yang bikin nama kampus terasa punya beban, bukan cuma label.">
+  <div class="rail top"><span>Universitas Prasetiya Mulya</span><span>02 — Nama</span></div>
+  <div class="ruletop"></div>
+  <div class="dv">
+    <div class="eyebrow">Dari bahasa Sanskerta</div>
+    <div class="big" style="margin-top:40px">Janji Mulia</div>
+    <div class="sub">Bukan nama pendiri, bukan nama tempat — melainkan sebuah komitmen. Para pendirinya memilih menamai lembaga ini dengan janji yang harus mereka tepati, bukan dengan nama mereka sendiri.</div>
+  </div>
+  <div class="dv-tag">
+    <div class="g"><span class="w">Prasetiya</span><span class="m">Janji</span></div>
+    <div class="g"><span class="w">Mulya</span><span class="m">Mulia</span></div>
+  </div>
+  <div class="rulebot"></div>
+  <div class="rail bot"><span>03</span><span>Arti Nama</span></div>
+</section>
+
+<!-- ══════════ 04 ASAL USUL ══════════ -->
+<section class="page" data-document-role="page" data-label="1982 — Awal Mula"
+ data-speaker-notes="Poin penting: MBA pertama di Indonesia, dan kelas pertamanya di hotel. Belum punya gedung, tapi sudah punya program. Itu urutan yang jarang.">
+  <div class="rail top"><span>Universitas Prasetiya Mulya</span><span>03 — Asal Usul</span></div>
+  <div class="ruletop"></div>
+  <div class="o4-num">1982</div>
+  <div class="o4-cap">Berdiri sebagai <strong style="font-weight:500;color:var(--ink)">Management Development Centre</strong>, dengan Prof. Dr. Djisman Simanjuntak sebagai ketua yayasan saat itu.</div>
+  <div class="o4-facts">
+    <div class="r"><div class="k">Tanggal</div><div class="v">6 September 1982</div></div>
+    <div class="r"><div class="k">Kelas perdana</div><div class="v">Hotel Kemang, Jakarta</div></div>
+    <div class="r"><div class="k">Batu pertama</div><div class="v">10 November 1982</div></div>
+    <div class="r"><div class="k">Program UKM</div><div class="v">20 angkatan · 1.100+ peserta</div></div>
+  </div>
+  <div class="o4-right">
+    <h3>MBA pertama di Indonesia —<br>kelas perdananya di hotel.</h3>
+    <p>Program yang diluncurkan adalah MBA modular, yang pertama di Indonesia. Modul Dasar I digelar tepat pada hari berdirinya, dan tempatnya bukan kampus.</p>
+    <p style="margin-top:28px">Di tahun yang sama dijalankan pula Program Pendidikan Terapan bagi Pengusaha Industri Kecil bersama Dinas Perindustrian DKI Jakarta. Gedung sendiri baru datang belakangan — batu pertamanya diletakkan dua bulan setelah kelas pertama berjalan.</p>
+  </div>
+  <div class="rulebot"></div>
+  <div class="rail bot"><span>04</span><span>Asal Usul</span></div>
+</section>
+
+<!-- ══════════ 05 LINI MASA ══════════ -->
+<section class="page" data-document-role="page" data-label="Lini Masa"
+ data-speaker-notes="Jangan dibaca satu-satu. Tunjuk tiga titik saja: 1982 lahir, 2005 buka S1, 2016 jadi universitas. Sisanya biar audiens baca sendiri.">
+  <div class="rail top"><span>Universitas Prasetiya Mulya</span><span>04 — Lini Masa</span></div>
+  <div class="ruletop"></div>
+  <div class="hdr" style="width:1100px">
+    <div class="eyebrow">Empat dekade</div>
+    <h2>Enam kali berganti nama,<br>satu arah yang sama.</h2>
+  </div>
+  <div class="hdr-side" style="top:210px">
+    <p>Dari pusat pelatihan menjadi universitas. Yang tidak pernah berganti hanya dua kata di depannya — dan orientasinya ke dunia usaha.</p>
+  </div>
+  <div class="tl">
+    <div class="axis"></div>
+    <div class="row">
+      <div class="it on"><div class="yr serif">1982</div><div class="dot"></div>
+        <div class="tx"><div class="t">Management<br>Development Centre</div><div class="d">Didirikan 70 pengusaha nasional.</div></div></div>
+      <div class="it"><div class="yr serif">1983</div><div class="dot"></div>
+        <div class="tx"><div class="t">Institut Manajemen</div><div class="d">Berganti nama menjadi Institut Manajemen Prasetiya Mulya.</div></div></div>
+      <div class="it"><div class="yr serif">1993</div><div class="dot"></div>
+        <div class="tx"><div class="t">Sekolah Tinggi<br>Manajemen</div><div class="d">Gelar MBA berubah menjadi Magister Manajemen.</div></div></div>
+      <div class="it on"><div class="yr serif">2005</div><div class="dot"></div>
+        <div class="tx"><div class="t">Program S1 dibuka</div><div class="d">Prasetiya Mulya SBE meluncurkan jenjang sarjana.</div></div></div>
+      <div class="it"><div class="yr serif">2011</div><div class="dot"></div>
+        <div class="tx"><div class="t">Kampus BSD</div><div class="d">Diresmikan Wapres Boediono, 27 Mei 2011.</div></div></div>
+      <div class="it on"><div class="yr serif">2016</div><div class="dot"></div>
+        <div class="tx"><div class="t">Menjadi Universitas</div><div class="d">Berdiri School of STEM di tahun yang sama.</div></div></div>
+      <div class="it"><div class="yr serif">2022</div><div class="dot"></div>
+        <div class="tx"><div class="t">School of Law &amp;<br>International Studies</div><div class="d">Sekolah ketiga menyusul.</div></div></div>
+    </div>
+  </div>
+  <div class="rulebot"></div>
+  <div class="rail bot"><span>05</span><span>Lini Masa</span></div>
+</section>
+
+<!-- ══════════ 06 TIGA SEKOLAH ══════════ -->
+<section class="page s6" data-document-role="page" data-label="Tiga Sekolah"
+ data-speaker-notes="Tunjukkan lompatannya: kampus bisnis yang berani buka Teknik Energi Terbarukan dan AI. Itu bukan ekspansi biasa, itu perubahan definisi diri.">
+  <div class="rail top"><span>Universitas Prasetiya Mulya</span><span>05 — Struktur</span></div>
+  <div class="ruletop"></div>
+  <div class="hdr" style="width:1080px">
+    <div class="eyebrow">Program Sarjana</div>
+    <h2>Sekolah bisnis yang kini<br>mengajar AI dan energi.</h2>
+  </div>
+  <div class="hdr-side" style="top:210px">
+    <p>Bermula murni sebagai sekolah bisnis, Prasmul kini memayungi sains-teknologi dan hukum internasional — 16 program studi di bawah tiga sekolah.</p>
+  </div>
+  <div class="sc" style="top:408px">
+    <div class="col">
+      <div class="n">9</div><div class="since">Program studi · sejak 1982</div>
+      <h3>School of Business<br>&amp; Economics</h3>
+      <div class="hr"></div>
+      <ul>
+        <li>Business</li><li>Branding</li><li>Finance &amp; Banking</li><li>Finance Technology</li>
+        <li>Accounting</li><li>Business Economics</li><li>International Business Marketing</li>
+        <li>Event</li><li>Hospitality Business</li>
+      </ul>
+    </div>
+    <div class="div"></div>
+    <div class="col">
+      <div class="n">6</div><div class="since">Program studi · sejak 2016</div>
+      <h3>School of STEM</h3>
+      <div class="hr"></div>
+      <ul>
+        <li>Business Mathematics</li><li>Food Business &amp; Technology</li>
+        <li>Renewable Energy Engineering</li><li>AI and Robotics</li>
+        <li>Digital Business Technology</li><li>Product Design Innovation</li>
+      </ul>
+    </div>
+    <div class="div"></div>
+    <div class="col">
+      <div class="n">1</div><div class="since">Program studi · sejak 2022</div>
+      <h3>School of Law &amp;<br>International Studies</h3>
+      <div class="hr"></div>
+      <ul><li>International Business Law</li></ul>
+      <div class="extra">
+        <div class="h">Selain jenjang sarjana</div>
+        <div class="b">S2 Magister Manajemen (5 program)<br>S3 Doktor Manajemen dan Kewirausahaan<br>Program non-gelar Executive Learning Institute</div>
+      </div>
+    </div>
+  </div>
+  <div class="rulebot"></div>
+  <div class="rail bot"><span>06</span><span>Struktur</span></div>
+</section>
+
+<!-- ══════════ 07 DUA KAMPUS (split) ══════════ -->
+<section class="page" data-document-role="page" data-label="Dua Kampus"
+ data-speaker-notes="Pembagian kerjanya rapi: BSD untuk yang sedang dibentuk, Cilandak untuk yang sudah berkarier. Kalau audiensnya alumni S2, sebut Cilandak duluan.">
+  <div class="split">
+    <div class="half d">
+      <div class="loc">Tangerang, Banten</div>
+      <h3>Kampus<br>BSD City</h3>
+      <div class="desc">Berada di kawasan EduTown BSD City, dikhususkan untuk program sarjana. Ciri khasnya bangunan beroval mencolok.</div>
+      <div class="rows">
+        <div class="rw"><div class="k">Peruntukan</div><div class="v">Program S1</div></div>
+        <div class="rw"><div class="k">Luas</div><div class="v">± 5 hektare</div></div>
+        <div class="rw"><div class="k">Diresmikan</div><div class="v">27 Mei 2011 — Wapres Boediono</div></div>
+      </div>
+      <div class="tag">Untuk yang sedang dibentuk</div>
+    </div>
+    <div class="half l">
+      <div class="loc">Jakarta Selatan</div>
+      <h3>Kampus<br>Cilandak</h3>
+      <div class="desc">Kampus pertama dan pusat kegiatan universitas. Kini fokus pada program pascasarjana dan pelatihan eksekutif.</div>
+      <div class="rows">
+        <div class="rw"><div class="k">Peruntukan</div><div class="v">S2, S3 &amp; program non-gelar</div></div>
+        <div class="rw"><div class="k">Luas</div><div class="v">1,5 hektare</div></div>
+        <div class="rw"><div class="k">Diresmikan</div><div class="v">12 November 1984</div></div>
+      </div>
+      <div class="tag">Untuk yang sudah berkarier</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 08 METODE ══════════ -->
+<section class="page" data-document-role="page" data-label="Cara Belajar"
+ data-speaker-notes="Ini inti motonya. Kalau cuma satu slide yang diingat audiens, usahakan yang ini: di Prasmul, ujian akhirnya bukan hafalan, tapi rencana bisnis yang harus dipertahankan.">
+  <div class="rail top"><span>Universitas Prasetiya Mulya</span><span>07 — Metode</span></div>
+  <div class="ruletop"></div>
+  <div class="eyebrow" style="position:absolute;left:110px;top:158px">Moto</div>
+  <div class="m8-quote">“A Collaborative Learning by Enterprising.”</div>
+  <div class="m8-sub">Prasmul memadukan kecerdasan bisnis dengan sains dan teknologi, dengan keyakinan bahwa kolaborasi adalah inti dari cara belajar hari ini — bukan hanya secara teori, tapi dalam penerapannya di dunia kerja.</div>
+  <div class="m8-cols">
+    <div class="c">
+      <div class="i">01</div>
+      <h4>Learning by doing</h4>
+      <div class="b">Simulasi bisnis menempatkan peserta dalam kelompok yang saling bersaing sebagai perusahaan. Konsep manajemen tidak sekadar dipelajari — ia diuji sampai terbentuk <em>sense of business</em>.</div>
+    </div>
+    <div class="c">
+      <div class="i">02</div>
+      <h4>Kelas yang berdebat</h4>
+      <div class="b">Diskusi dan analisis kasus, riset pasar, survei lapangan, hingga pembicara tamu. Interaksi antarpeserta punya bobot besar dalam penilaian, bukan pelengkap.</div>
+    </div>
+    <div class="c">
+      <div class="i">03</div>
+      <h4>Rencana bisnis<br>sebagai ujian</h4>
+      <div class="b">Ujung dari proses belajar bukan hafalan, melainkan rencana bisnis yang harus disusun dan dipertahankan di hadapan penguji.</div>
+    </div>
+  </div>
+  <div class="rulebot"></div>
+  <div class="rail bot"><span>08</span><span>Metode</span></div>
+</section>
+
+<!-- ══════════ 09 PEMBEDA ══════════ -->
+<section class="page" data-document-role="page" data-label="Yang Membedakan"
+ data-speaker-notes="Fakta paling kuat di seluruh dek: gedung-gedungnya dinamai pendiri, bukan tokoh akademik. Sebut itu, lalu berhenti — biar audiens yang menyimpulkan sendiri.">
+  <div class="rail top"><span>Universitas Prasetiya Mulya</span><span>08 — Pembeda</span></div>
+  <div class="ruletop"></div>
+  <div class="hdr" style="width:1300px">
+    <div class="eyebrow">Yang membedakan</div>
+    <h2>Lahir dari ruang rapat,<br>bukan ruang kuliah.</h2>
+  </div>
+  <div class="p9-body">
+    <p>Mayoritas kampus dibangun oleh akademisi lalu mencari relevansi ke industri. Prasmul menempuh arah sebaliknya: dibangun oleh pelaku industri yang lalu membangun akademianya.</p>
+  </div>
+  <div class="p9-note">Bukti yang paling terlihat berdiri di kampus BSD — gedung-gedungnya tidak dinamai tokoh akademik, melainkan nama para pendiri Yayasan Prasetiya Mulya.</div>
+  <div class="p9-f">
+    <div class="h">Nama gedung di kampus BSD · pendiri yayasan</div>
+    <div class="row">
+      <div class="n serif">Liem Sioe Liong</div>
+      <div class="n serif">William Soerjadjaja</div>
+      <div class="n serif">Eka Tjipta Widjaja</div>
+      <div class="n serif">Sofjan Wanandi</div>
+    </div>
+  </div>
+  <div class="rulebot"></div>
+  <div class="rail bot"><span>09</span><span>Pembeda</span></div>
+</section>
+
+<!-- ══════════ 10 PENUTUP ══════════ -->
+<section class="page dark" data-document-role="page" data-label="Penutup"
+ data-speaker-notes="Tutup dengan mengulang nama kampus dan artinya. Ini menutup lingkaran dari slide ketiga. Jangan tambah kalimat lagi setelah ini — berhenti, lalu buka sesi tanya jawab.">
+  <div class="rail top"><span>Universitas Prasetiya Mulya</span><span>Penutup</span></div>
+  <div class="ruletop"></div>
+  <div class="c10">
+    <div class="eyebrow">Empat dekade kemudian</div>
+    <div class="big" style="margin-top:44px">Tujuh puluh orang<br>membuat sebuah janji.</div>
+    <p>Yang tersisa hari ini adalah sekolahnya. Dari satu kelas MBA di Hotel Kemang pada 1982, menjadi tiga sekolah di dua kampus. Namanya tidak pernah berubah — dan artinya masih sama.</p>
+    <div class="ty">Terima kasih</div>
+  </div>
+  <div class="c10-side">
+    <div class="r"><div class="k">Berdiri</div><div class="v">6 September 1982</div></div>
+    <div class="r"><div class="k">Kampus</div><div class="v">BSD City &amp; Cilandak</div></div>
+    <div class="r"><div class="k">Moto</div><div class="v">A Collaborative Learning by Enterprising</div></div>
+  </div>
+  <div class="rulebot"></div>
+  <div class="rail bot"><span>10</span><span>Penutup</span></div>
+</section>
+
+</body>
+</html>
