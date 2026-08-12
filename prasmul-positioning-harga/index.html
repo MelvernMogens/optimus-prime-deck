@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Membaca Positioning dari Daftar Harga — Universitas Prasetiya Mulya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111111;
+    --paper:#FFFFFF;
+    --blue:#0E3386;
+    --rule:#D8D8D4;
+    --muted:#6E7581;
+    --wash:#F4F4F1;
+    --m:100px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#8A8A8A;font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased}
+
+  section{
+    width:1920px;height:1080px;position:relative;overflow:hidden;
+    background:var(--paper);color:var(--ink);
+    display:block;margin:0 auto 40px;
+  }
+
+  /* ---------- shared furniture ---------- */
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--blue);
+  }
+  .eyebrow.dim{color:var(--muted)}
+  .rule{height:3px;background:var(--ink);border:0}
+  .hair{height:1px;background:var(--rule);border:0}
+  .foot{
+    position:absolute;left:var(--m);right:var(--m);bottom:48px;
+    display:flex;justify-content:space-between;align-items:flex-end;
+    font-family:'JetBrains Mono',monospace;font-size:40px;color:var(--muted);
+  }
+  .foot .pg{color:var(--ink);font-weight:500}
+
+  h1{font-size:112px;font-weight:700;line-height:1.02;letter-spacing:-.03em}
+  h2{font-size:68px;font-weight:700;line-height:1.12;letter-spacing:-.022em;max-width:1660px}
+  p{font-size:44px;font-weight:400;line-height:1.45;color:#2B2F36;max-width:1180px}
+  .lead{font-size:52px;line-height:1.4}
+  strong{font-weight:600;color:var(--ink)}
+  .blue{color:var(--blue)}
+
+  .body{position:absolute;left:var(--m);right:var(--m);top:252px}
+  .head{position:absolute;left:var(--m);right:var(--m);top:96px}
+  .head .rule{margin-top:36px}
+
+  /* ---------- 01 cover ---------- */
+  .cover{background:var(--ink);color:#FFFFFF}
+  .cover .bar{position:absolute;left:0;top:0;width:22px;height:1080px;background:var(--blue)}
+  .cover .inner{position:absolute;left:160px;right:var(--m);top:250px}
+  .cover h1{font-size:132px;max-width:1480px}
+  .cover .sub{font-size:48px;color:#B9BEC7;margin-top:52px;max-width:1200px;line-height:1.4}
+  .cover .meta{
+    position:absolute;left:160px;right:var(--m);bottom:96px;
+    display:flex;justify-content:space-between;align-items:flex-end;
+    font-family:'JetBrains Mono',monospace;font-size:40px;color:#8C929C;
+  }
+  .cover .meta .who{color:#FFFFFF}
+
+  /* ---------- 02 thesis ---------- */
+  .thesis .quote{font-size:88px;font-weight:600;line-height:1.18;letter-spacing:-.025em;max-width:1560px}
+  .thesis .split{display:flex;gap:120px;margin-top:120px}
+  .thesis .col{flex:1;border-top:3px solid var(--ink);padding-top:32px}
+  .thesis .col.b{border-top-color:var(--blue)}
+  .thesis .col h3{font-family:'JetBrains Mono',monospace;font-size:34px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px}
+  .thesis .col.b h3{color:var(--blue)}
+  .thesis .col p{font-size:44px;max-width:none}
+
+  /* ---------- 03 big number ---------- */
+  .fig{display:flex;align-items:flex-start;gap:110px}
+  .fig .num{font-size:300px;font-weight:700;line-height:.84;letter-spacing:-.05em;color:var(--blue)}
+  .fig .num .unit{font-size:96px;font-weight:600;letter-spacing:-.01em}
+  .fig .side{padding-top:26px;max-width:900px}
+  .fig .side p{font-size:46px;max-width:none}
+
+  .bars{margin-top:104px;display:flex;flex-direction:column;gap:34px;max-width:1560px}
+  .row{display:flex;align-items:center;gap:36px}
+  .row .lbl{width:640px;font-size:40px;font-weight:500;text-align:right;color:#2B2F36}
+  .row .track{flex:1;height:78px;background:var(--wash);position:relative}
+  .row .fill{height:78px;background:var(--ink)}
+  .row.hi .fill{background:var(--blue)}
+  .row .val{width:290px;font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:500}
+  .row.hi .val{color:var(--blue)}
+
+  /* ---------- 04 statement ---------- */
+  .stmt .big{font-size:96px;font-weight:700;line-height:1.16;letter-spacing:-.028em;max-width:1620px}
+  .stmt .note{margin-top:88px;border-left:8px solid var(--blue);padding-left:44px;max-width:1300px}
+  .stmt .note p{font-size:46px;max-width:none}
+
+  /* ---------- 05 seven ---------- */
+  .seven{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:24px;border-top:3px solid var(--ink)}
+  .seven .c{border-right:1px solid var(--rule);padding:30px 24px 34px}
+  .seven .c:last-child{border-right:0}
+  .seven .c .n{font-family:'JetBrains Mono',monospace;font-size:32px;color:var(--muted);margin-bottom:24px}
+  .seven .c .t{font-size:52px;font-weight:700;letter-spacing:-.01em;color:var(--blue)}
+  .callout{margin-top:40px;background:var(--wash);border-left:8px solid var(--ink);padding:34px 48px;max-width:1560px}
+  .callout p{font-size:48px;max-width:none}
+
+  /* ---------- 06 compare ---------- */
+  .two{display:flex;gap:0;margin-top:16px;border-top:3px solid var(--ink)}
+  .two .side{flex:1;padding:30px 52px 26px;border-right:1px solid var(--rule)}
+  .two .side:last-child{border-right:0}
+  .two .side.accent{background:var(--wash)}
+  .two .place{font-family:'JetBrains Mono',monospace;font-size:34px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .two .side.accent .place{color:var(--blue)}
+  .two .amt{font-size:100px;font-weight:700;letter-spacing:-.04em;line-height:1;margin:18px 0 8px}
+  .two .side.accent .amt{color:var(--blue)}
+  .two .cap{font-size:34px;color:var(--muted)}
+  .two .list{margin-top:24px;border-top:1px solid var(--rule);padding-top:26px}
+  .two .list div{font-size:38px;line-height:1.4;color:#2B2F36}
+  .delta{margin-top:22px;display:flex;align-items:baseline;gap:32px}
+  .delta .d{font-family:'JetBrains Mono',monospace;font-size:60px;font-weight:500;color:var(--blue)}
+  .delta .dt{font-size:44px;color:#2B2F36}
+
+  /* ---------- 07 fixed vs variable ---------- */
+  .stack{display:flex;flex-direction:column;gap:0;margin-top:20px;max-width:1620px}
+  .band{display:flex;align-items:center;border-bottom:1px solid var(--rule);padding:22px 0}
+  .band:first-child{border-top:3px solid var(--ink)}
+  .band .k{width:760px;font-size:42px;font-weight:600}
+  .band .v{width:420px;font-family:'JetBrains Mono',monospace;font-size:48px;font-weight:500}
+  .band .s{flex:1;font-size:38px;color:var(--muted);text-align:right}
+  .band.var .v{color:var(--blue)}
+  .band.var .k{color:var(--blue)}
+
+  /* ---------- 08 closing ---------- */
+  .end{background:var(--ink);color:#FFFFFF}
+  .end .bar{position:absolute;left:0;bottom:0;width:1920px;height:22px;background:var(--blue)}
+  .end .inner{position:absolute;left:var(--m);right:var(--m);top:236px}
+  .end .kicker{font-family:'JetBrains Mono',monospace;font-size:34px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:48px}
+  .end h2{font-size:88px;color:#FFFFFF;max-width:1560px;line-height:1.14}
+  .end .src{
+    position:absolute;left:var(--m);right:var(--m);bottom:110px;
+    border-top:1px solid #3A3F48;padding-top:36px;
+    font-family:'JetBrains Mono',monospace;font-size:38px;color:#8C929C;line-height:1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- 01 -->
+<section class="cover" data-document-role="page" data-label="Cover" data-speaker-notes="Deck analisis positioning Universitas Prasetiya Mulya, dibaca lewat struktur biaya S1 yang dipublikasikan sendiri. Sumber tunggal: halaman Admisi dan Biaya Kuliah S1, diakses 12 Agustus 2026.">
+  <div class="bar"></div>
+  <div class="inner">
+    <h1>Membaca positioning<br>dari daftar harga.</h1>
+    <div class="sub">Universitas Prasetiya Mulya — analisis brand berdasarkan struktur biaya S1 yang dipublikasikan sendiri.</div>
+  </div>
+  <div class="meta">
+    <div class="who">Melvern Mogens · S1 Branding</div>
+    <div>Agustus 2026</div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section data-document-role="page" data-label="Tesis" data-speaker-notes="Brosur menyatakan aspirasi. Daftar harga menyatakan keyakinan. Yang kedua lebih sulit dipalsukan karena ada konsekuensi finansialnya.">
+  <div class="head"><div class="eyebrow dim">01 — Tesis</div><hr class="rule"></div>
+  <div class="body">
+    <div class="quote">Daftar harga adalah dokumen brand<br>yang paling jujur.</div>
+    <div class="split">
+      <div class="col">
+        <h3>Brosur bilang</h3>
+        <p>apa yang institusi <strong>ingin</strong> jadi. Tidak ada biaya untuk melebih-lebihkan.</p>
+      </div>
+      <div class="col b">
+        <h3>Daftar harga bilang</h3>
+        <p>apa yang institusi <strong>yakin bisa ditagih</strong>. Salah menilai, kursi tidak terisi.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div>Universitas Prasetiya Mulya</div><div class="pg">02</div></div>
+</section>
+
+<!-- 03 -->
+<section data-document-role="page" data-label="Selisih 10 juta" data-speaker-notes="Biaya Pengembangan untuk School of Business and Economics di kampus BSD adalah 65 juta, sementara School of STEM dan School of Law and International Studies masing-masing 55 juta. Ini kebalikan dari pola umum, di mana program teknik justru dibanderol lebih mahal karena biaya laboratorium.">
+  <div class="head"><div class="eyebrow">02 — Temuan</div><hr class="rule"></div>
+  <div class="body">
+    <h2 style="margin-bottom:76px">Bisnis dibanderol 10 juta di atas STEM — kebalikan dari pola industri.</h2>
+    <div class="bars">
+      <div class="row hi"><div class="lbl">Business &amp; Economics</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">Rp 65 jt</div></div>
+      <div class="row"><div class="lbl">STEM</div><div class="track"><div class="fill" style="width:84.6%"></div></div><div class="val">Rp 55 jt</div></div>
+      <div class="row"><div class="lbl">Law &amp; International Studies</div><div class="track"><div class="fill" style="width:84.6%"></div></div><div class="val">Rp 55 jt</div></div>
+      <div class="row"><div class="lbl">Hospitality Bisnis &amp; Event</div><div class="track"><div class="fill" style="width:84.6%"></div></div><div class="val">Rp 55 jt</div></div>
+    </div>
+  </div>
+  <div class="foot"><div>Biaya Pengembangan, angkatan 2027</div><div class="pg">03</div></div>
+</section>
+
+<!-- 04 -->
+<section data-document-role="page" data-label="Artinya" data-speaker-notes="Situs resmi menyebut Prasmul menggabungkan kecerdasan bisnis dengan teknik dan teknologi sains. Struktur harganya menunjukkan mana dari keduanya yang jadi produk utama.">
+  <div class="head"><div class="eyebrow dim">03 — Interpretasi</div><hr class="rule"></div>
+  <div class="body stmt">
+    <div class="big">Prasmul menjual dirinya sebagai <span class="blue">sekolah bisnis</span> — teknik adalah pelengkap, bukan produk utamanya.</div>
+    <div class="note">
+      <p>Situs resminya menyebut Prasmul “menggabungkan kecerdasan bisnis dengan teknik dan teknologi sains.” Urutan kalimat itu ternyata juga urutan harganya.</p>
+    </div>
+  </div>
+  <div class="foot"><div>Universitas Prasetiya Mulya</div><div class="pg">04</div></div>
+</section>
+
+<!-- 05 -->
+<section data-document-role="page" data-label="Tujuh nama" data-speaker-notes="Kebijakan pengunduran diri menyebut tujuh PTN secara eksplisit: diterima di salah satunya lewat SNBP atau SNBT memberi potongan 50 persen dari Development Fee. Tidak ada kampus swasta yang disebut.">
+  <div class="head"><div class="eyebrow">04 — Temuan</div><hr class="rule"></div>
+  <div class="body">
+    <h2 style="margin-bottom:40px">Prasmul menuliskan daftar pesaingnya ke dalam kebijakan refund.</h2>
+    <div class="seven">
+      <div class="c"><div class="n">01</div><div class="t">UI</div></div>
+      <div class="c"><div class="n">02</div><div class="t">ITB</div></div>
+      <div class="c"><div class="n">03</div><div class="t">UGM</div></div>
+      <div class="c"><div class="n">04</div><div class="t">IPB</div></div>
+      <div class="c"><div class="n">05</div><div class="t">ITS</div></div>
+      <div class="c"><div class="n">06</div><div class="t">Unpad</div></div>
+      <div class="c"><div class="n">07</div><div class="t">Unair</div></div>
+    </div>
+    <div class="callout">
+      <p>Diterima di salah satu dari tujuh nama ini lewat SNBP/SNBT → potongan <strong>50% Development Fee</strong>. Tidak ada satu pun kampus swasta di daftar itu.</p>
+    </div>
+  </div>
+  <div class="foot"><div>Kebijakan pengunduran diri, poin 4</div><div class="pg">05</div></div>
+</section>
+
+<!-- 06 -->
+<section data-document-role="page" data-label="Dua kampus" data-speaker-notes="Empat program identik ditawarkan di dua kampus dengan Biaya Pengembangan berbeda: BSD 65 juta, Cilandak 55 juta. Selisihnya bukan kurikulum.">
+  <div class="head"><div class="eyebrow dim">05 — Temuan</div><hr class="rule"></div>
+  <div class="body">
+    <h2 style="margin-bottom:26px">Program sama, kampus beda, harga beda 10 juta.</h2>
+    <div class="two">
+      <div class="side accent">
+        <div class="place">Kampus BSD</div>
+        <div class="amt">Rp 65 jt</div>
+        <div class="list"><div>Bisnis · Branding</div><div>International Marketing · Ekonomi Bisnis</div></div>
+      </div>
+      <div class="side">
+        <div class="place">Kampus Cilandak</div>
+        <div class="amt">Rp 55 jt</div>
+        <div class="list"><div>Bisnis · Branding</div><div>International Marketing · Business Economics</div></div>
+      </div>
+    </div>
+    <div class="delta"><div class="d">+18%</div><div class="dt">Yang dijual bukan cuma kurikulumnya — tapi alamatnya.</div></div>
+  </div>
+  <div class="foot"><div>Biaya Pengembangan, angkatan 2027</div><div class="pg">06</div></div>
+</section>
+
+<!-- 07 -->
+<section data-document-role="page" data-label="Tetap vs variabel" data-speaker-notes="Uang Kuliah Tetap dan biaya SKS identik di semua program. Seluruh diferensiasi harga terjadi di Biaya Pengembangan — dibayar sekali, di muka, sebelum mahasiswa sempat menilai kualitasnya.">
+  <div class="head"><div class="eyebrow">06 — Struktur</div><hr class="rule"></div>
+  <div class="body">
+    <h2 style="margin-bottom:30px">Seluruh diferensiasi harga ditaruh di komponen yang dibayar paling awal.</h2>
+    <div class="stack">
+      <div class="band"><div class="k">Uang Kuliah Tetap</div><div class="v">Rp 19,5 jt</div><div class="s">sama di semua program</div></div>
+      <div class="band"><div class="k">SKS Program Nasional</div><div class="v">Rp 500 rb</div><div class="s">sama di semua program</div></div>
+      <div class="band"><div class="k">Biaya Orientasi</div><div class="v">Rp 5 jt</div><div class="s">sama di semua program</div></div>
+      <div class="band var"><div class="k">Biaya Pengembangan</div><div class="v">Rp 55–65 jt</div><div class="s">satu-satunya yang membedakan · dibayar di muka</div></div>
+    </div>
+  </div>
+  <div class="foot"><div>Struktur biaya S1, angkatan 2027</div><div class="pg">07</div></div>
+</section>
+
+<!-- 08 -->
+<section class="end" data-document-role="page" data-label="Penutup" data-speaker-notes="Kesimpulan. Semua angka berasal dari satu halaman publik yang diterbitkan Prasmul sendiri.">
+  <div class="inner">
+    <div class="kicker">Kesimpulan</div>
+    <h2>Positioning bukan yang kamu klaim.<br>Positioning adalah yang kamu<br>berani tagih.</h2>
+  </div>
+  <div class="src">
+    Sumber: Universitas Prasetiya Mulya, “Admisi dan Biaya Kuliah S1”<br>
+    prasetiyamulya.ac.id/penerimaan-s1 · diakses 12 Agustus 2026 · biaya angkatan 2027
+  </div>
+  <div class="bar"></div>
+</section>
+
+</body>
+</html>
